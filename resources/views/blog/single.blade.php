@@ -12,9 +12,12 @@
                 <div class="blog-post">
 			<h2 class="blog-post-title">{{$post->title}}</h2>
        <p class="blog-post-meta">{{ date('M j, Y', strtotime($post->created_at)) }} by <a href="#">Jacob</a></p>
-      		{{$post->body}}
+      		{!! $post->body !!}
       		<hr>
       		<p>Posted in: {{ $post->category->name }}</p>
+           @foreach($post->tags as $tag)
+                 <span class="badge badge-pill badge-secondary">{{$tag->name}}</span>
+            @endforeach
                </div>
           </div>
       </div>

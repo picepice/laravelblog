@@ -41,7 +41,7 @@
 
               <div class="form-group">
                 {{ Form::label('body', "Post Body:") }}
-                {{ Form::textarea('body', null, array('class' => 'form-control', 'placeholder' => 'Body Text',  'required' => '')) }}
+                {{ Form::textarea('body', null, array('class' => 'form-control', 'id' => 'article-ckeditor', 'placeholder' => 'Body Text',  'required' => '')) }}
               </div>
 
               {{ Form::submit('Create Post', array('class' => 'btn btn-success btn-lg btn-block')) }}
@@ -59,6 +59,12 @@
 
   {!! Html::script('js/parsley.min.js') !!}
    {!! Html::script('js/select2.min.js') !!}
+
+    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace( 'article-ckeditor' );
+    </script>
+
 <script type="text/javascript">
     $(document).ready(function() {
         $('.select2-multi').select2();

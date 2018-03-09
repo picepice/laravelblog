@@ -10,7 +10,7 @@
 			  <div class="card-body">
 		
 						{{$post->created_at->toFormattedDateString()}}
-					<p> {{ $post->body }} </p>
+					<p> {!! $post->body !!} </p>
 					@foreach($post->tags as $tag)
 					<span class="badge badge-pill badge-secondary">{{$tag->name}}</span>
 					@endforeach

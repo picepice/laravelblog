@@ -34,7 +34,7 @@
 
               <div class="form-group">
                 {{ Form::label('body', "Post Body:") }}
-                {{ Form::textarea('body', null, array('class' => 'form-control', 'required' => '')) }}
+                {{ Form::textarea('body', null, array('class' => 'form-control', 'id' => 'article-ckeditor', 'required' => '')) }}
               </div>
        </div> <!-- card body-->
      </div> <!-- card-->
@@ -78,6 +78,11 @@
 
   
 {!! Html::script('js/select2.min.js') !!}
+<script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace( 'article-ckeditor' );
+    </script>
+
 <script type="text/javascript">
 
     $('.select2-multi').select2();
