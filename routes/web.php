@@ -28,6 +28,7 @@ Route::resource('posts', 'PostController');
 Route::resource('tags', 'TagController', ['except' => ['create']]);
 Route::resource('categories', 'CategoryController', ['except' => ['create']]);
 Route::resource('comments', 'CommentsController');
+Route::post('comments/{post_id}', ['uses' => 'CommentsController@store', 'as' => 'comments.store']);
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
