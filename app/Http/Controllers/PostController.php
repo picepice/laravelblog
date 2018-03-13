@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Category;
+use App\Comment;
 use App\Tag;
 use Session;
 class PostController extends Controller
@@ -79,8 +80,9 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
+        $comments = Comment::all();
         
-        return view('posts.show')->withPost($post);
+        return view('posts.show', compact('post', 'comments'));
     }
 
     /**

@@ -1,6 +1,8 @@
 @extends('main')
 	@section('title', '| Show Post')
-
+ @section('stylesheets')
+    {!! Html::style('css/style.css') !!}
+  @endsection
 	@section('content')
 
 <div class="row">
@@ -9,59 +11,18 @@
            <h1 class="card-header">{{ $post->title }}</h1>
 			  <div class="card-body">
 		
-						{{$post->created_at->toFormattedDateString()}}
-					<p> {!! $post->body !!} </p>
-					@foreach($post->tags as $tag)
-					<span class="badge badge-pill badge-secondary">{{$tag->name}}</span>
-					@endforeach
+			{{$post->created_at->toFormattedDateString()}}
+			<p> {!! $post->body !!} </p>
+			@foreach($post->tags as $tag)
+			<span class="badge badge-pill badge-secondary">{{$tag->name}}</span>
+			@endforeach
+			<hr>					
+			@include('pages.post.comments')
 
-				</div>
+			</div> <!-- card body -->
 		</div> <!-- card-->
 	</div> <!-- col-md-8-->
-
-		<div class="col-md-4">
-			 <div class="card">
-            <div class="card-header">Admin Panel</div>
-	      	  <div class="card-body">
-			  		<label><strong>Url:</strong></label>
-					<p><a href="{{ route('blog.single', $post->slug) }}">{{ route('blog.single', $post->slug) }}</a></p>
-
-				<dl class="dl-horizontal">
-					<label><strong>Category:</strong></label>
-						{{ $post->category->name }}
-				</dl>
-				<dl class="dl-horizontal">
-					<label><strong>Created At:</strong></label>
-						{{ date('M j, Y h:i a', strtotime($post->created_at)) }}
-				</dl>
-
-				<dl class="dl-horizontal">
-					<label><strong>Last Updated:</strong></label>
-						{{ date('M j, Y h:i a', strtotime($post->updated_at)) }}
-				</dl>
-				
-				<div class="row">
-					@if(Auth::user()->id == $post->user_id)
-						<div class="col-sm-6">
-							{!! Html::linkRoute('posts.edit', 'Edit', array($post->id), array('class' => 'btn btn-primary btn-block')) !!}
-					    
-						</div>
-					    <div class="col-sm-6">
-					    	 {!! Form::model($post, ['route' => ['posts.destroy', $post->id], 'method' => 'DELETE']) !!}
-					    	{{ Form::submit('Delete', ['class' => 'btn btn-danger btn-block']) }}
-						</div>
-					@endif
-				</div>
-
-				<div class="row">
-					<div class="col-md-12">
-						{{ Html::linkRoute('posts.index', '<< See All Posts', array(), ['class' => 'btn btn-secondary btn-block',  'style' =>'margin-top: 25px;']) }}
-					</div>
-				</div>
-				
-			</div> <!--card body-->
-		</div> <!-- card-->
-	</div> <!-- col-md-4 -->
+			@include('pages.post.adminpanelshow')
 </div>	<!-- row -->
 
 @endsection
